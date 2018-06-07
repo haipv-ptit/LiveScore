@@ -1,0 +1,48 @@
+﻿@model SportNews.Models.newslist
+@{
+    ViewBag.Title = "News List";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ctLst != null)
+{
+    <hr />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            News List
+        </div>
+        <div class="panel-body" id="pbd">
+            @*<div class="panel panel-default">
+                <div class="panel-heading"></div>
+                <div class="panel-body">*@
+                    <table class="table table-striped">
+                        <thead class="thead">
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var dat in Model.ctLst)
+                            {
+                                <tr>
+                                    <td>@dat.title</td>
+                                    <td>@dat.cat_name</td>
+                                    <td>@dat.descp</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                @*</div>
+            </div>*@
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+    });
+</script>

@@ -1,0 +1,93 @@
+﻿@model SportNews.Models.newslist
+@{
+    ViewBag.Title = "News Board";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ctLst != null)
+{
+    <hr />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            News Board
+        </div>
+        <div class="panel-body" id="pbd">
+            @*<div class="panel panel-default">
+                <div class="panel-body">*@
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    @foreach (var dat in Model.ctLst)
+                    {
+                        <ul class="list-group">
+                            @if (dat.Stt == 1)
+                            {
+                                <li class="list-group-item" id="@dat.news_id">
+                                    <a class="lnkne">
+                                        <img src="@dat.imageLnk" alt="image link" border="0">
+                                        <label>@dat.title</label>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="list-group-item" id="@dat.news_id">
+                                    <a class="lnkne">
+                                        <label>@dat.title</label>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    <a class="lnkfull">
+                        <label>See more...</label>
+                    </a>
+                </div>
+            </div>
+            @*</div>
+                </div>*@
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lnkne').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/Home/NewsDetail',
+                type: 'GET',
+                async: false,
+                dataType: 'html',
+                data: {
+                    id: $(this).closest('li').attr('id')
+                },
+                success: function (data) {
+                    $('#ndt').html(data);
+                    //e.target;
+                    //e.relatedTarget;
+                }
+            });
+            return false;
+        }
+        );
+
+        $('.lnkfull').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/Home/FullNews',
+                type: 'GET',
+                async: false,
+                dataType: 'html',
+                //data: {
+                //    id: $(this).closest('li').attr('id')
+                //},
+                success: function (data) {
+                    $('#ndt').html(data);
+                    //e.target;
+                    //e.relatedTarget;
+                }
+            });
+            return false;
+        }
+        );
+    });
+</script>
